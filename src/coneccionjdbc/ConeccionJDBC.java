@@ -22,39 +22,38 @@ public class ConeccionJDBC {
             statement = conexion.createStatement();
             rs = statement.executeQuery("SELECT * FROM clientes");
             while (rs.next()) {                
-                System.out.println(rs.getString("nombre"));
-            }
-                        
-            //Insertar datos
-            statement.execute("INSERT INTO `clientes`(`idClientes`, `nombre`, `edad`, `numero contacto`) VALUES ('7','Camila Caicedo','27','6073956846')");
+                System.out.println(rs.getString("nombre"));           
+            
+           
+
+        }    //Insertar datos
+            statement.execute("INSERT INTO `clientes` (`nombre`, `edad`) VALUES ('Camila Caicedo','27')");
             System.out.println("");
             rs = statement.executeQuery("SELECT * FROM clientes");
             while (rs.next()) {                
-                System.out.println(rs.getString("nombre"));
+                System.out.println(rs.getString("nombre")+" "+rs.getInt("edad"));
+            }
+     
+            //Actialización de datos
+            statement.execute("UPDATE `clientes` SET `nombre` = 'Maria' , `edad` = '18' WHERE `clientes`.`idClientes` = 7; ");
+            System.out.println("");
+            rs = statement.executeQuery("SELECT * FROM clientes");
+            while (rs.next()) {                
+                System.out.println(rs.getString("nombre")+" "+rs.getInt("edad"));
             }
             
-            //Actialización de datos
-            statement.execute("UPDATE `clientes` SET `nombre` = 'Rosario Triana' , WHERE `clientes`.`idClientes` = 5;");
+            //Eliminar Datos 
+            statement.execute("DELETE FROM `clientes` WHERE `clientes`.`idClientes`= 11 ");
             System.out.println("");
             rs = statement.executeQuery("SELECT * FROM clientes");
             while (rs.next()) {                
-                System.out.println(rs.getString("nombre"));
+                System.out.println(rs.getString("nombre")+" "+rs.getInt("edad"));
             }
 
-            //Eliminar datos 
-            statement.execute("DELETE FROM `clientes` WEHERE `idClientes`=7");
-            System.out.println("");
-            rs = statement.executeQuery("SELECT * FROM clientes");
-            while (rs.next()) {                
-                System.out.println(rs.getString("nombre"));
-            }
-              
             
         } catch (SQLException ex) {
             Logger.getLogger(ConeccionJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-       
        
     }
     
